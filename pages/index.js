@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Reloader from "../components/reloader"
+import TimeConsts from '../utils/timeConsts'
 
 export default function Home() {
 
@@ -18,7 +19,7 @@ export default function Home() {
 
       <main className={styles.main}>
           { /* TODO make this every day or so, maybe check if build is updated first */}
-          <Reloader durationMs={30000}/>
+          <Reloader durationMs={TimeConsts.MinuteInMs * 2}/>
 
           <video autoPlay loop muted className={styles.video_container}>
             <source src="/catnip_mice.mp4" type="video/mp4" />

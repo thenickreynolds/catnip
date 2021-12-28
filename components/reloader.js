@@ -6,7 +6,7 @@ function Reloader({ durationMs }) {
       location.reload();
     }, durationMs);
   }, []);
-  return <div>hello</div>
+  return <></>
 }
 
 export default Reloader;
