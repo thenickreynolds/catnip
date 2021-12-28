@@ -16,7 +16,7 @@ export default function Home() {
 
       <main className={styles.main}>
 
-          <video autoplay loop muted controls className={styles.video_container}>
+          <video autoPlay loop muted controls className={styles.video_container}>
             <source src="/catnip_mice.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
