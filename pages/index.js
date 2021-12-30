@@ -2,6 +2,7 @@ import styles from "../styles/Home.module.css";
 import Reloader from "../components/reloader";
 import TimeConsts from "../utils/timeConsts";
 import PageHead from "../components/pageHead";
+import Video from "../utils/videos";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
         <Reloader durationMs={TimeConsts.MinuteInMs * 2} />
 
         <video autoPlay loop muted className={styles.video_container}>
-          <source src="/catnip_mice.mp4" type="video/mp4" />
+          <source src={Video.defaultOption.path} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </main>

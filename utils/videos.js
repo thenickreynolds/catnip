@@ -1,18 +1,16 @@
-class Videos {
-  static options = [];
-  static defaultOption;
-
-  constructor(name, url) {
+class Video {
+  constructor(name, path) {
     this.name = name;
-    this.url = url;
-
-    if (!Videos.defaultOption) Videos.defaultOption = this;
-
-    Videos.options.push(this);
+    this.path = path;
   }
 }
 
-new Videos("Mice", "/catnip_mice.mp4");
-new Videos("Birds", "/videos/birds.mp4");
+class Videos {
+  static MICE = new Video("Mice", "/videos/mice.mp4");
+  static BIRDS = new Video("Birds", "/videos/birds.mp4");
+  static options = [this.MICE, this.BIRDS];
+
+  static defaultOption = this.MICE;
+}
 
 export default Videos;
