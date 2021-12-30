@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/globals.css";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
