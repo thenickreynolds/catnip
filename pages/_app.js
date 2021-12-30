@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/globals.css";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { UserProvider } from "@auth0/nextjs-auth0";
 import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
@@ -9,13 +9,9 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <Auth0Provider
-      domain={"vitatua.auth0.com"}
-      clientId={"r62Fac4ZjZ4DL0p8gaav9kR46ZjFTDMN"}
-      redirectUri={"http://localhost:3000/"}
-    >
+    <UserProvider>
       <Component {...pageProps} />
-    </Auth0Provider>
+    </UserProvider>
   );
 }
 

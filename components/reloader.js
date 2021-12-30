@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 function Reloader({ durationMs }) {
-  useEffect(() => {
-    setTimeout(function() {
-      location.reload();
-    }, durationMs);
-  }, []);
-  return <></>
+  // useEffect(() => {
+  //   const id = setTimeout(function () {
+  //     location.reload();
+  //     return () => clearTimeout(id);
+  //   }, durationMs);
+  // }, [durationMs]);
+  return <></>;
 }
 
 export default Reloader;
