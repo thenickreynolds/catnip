@@ -1,7 +1,12 @@
+import "bootstrap/dist/css/bootstrap.css";
 import "../styles/globals.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap");
+  }, []);
+
   return (
     <Auth0Provider
       domain={"vitatua.auth0.com"}
