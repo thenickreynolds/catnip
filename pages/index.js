@@ -1,6 +1,7 @@
 import styles from "../styles/Home.module.css";
 import Reloader from "../components/reloader";
 import TimeConsts from "../utils/timeConsts";
+import Heading from "../components/heading";
 
 export default function Home() {
   return (
