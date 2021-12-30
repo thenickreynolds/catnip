@@ -2,12 +2,12 @@ import styles from "../styles/Home.module.css";
 import LoginButton from "../components/loginButton";
 import UserProfile from "../components/userProfile";
 import LogoutButton from "../components/logoutButton";
-import Heading from "../components/heading";
+import PageHead from "../components/pageHead";
 
 export default function Settings() {
   return (
     <div className={styles.container}>
-      <Heading />
+      <PageHead />
 
       <main className={styles.main}>
         <div>Settings</div>

@@ -1,12 +1,12 @@
 import styles from "../styles/Home.module.css";
 import Reloader from "../components/reloader";
 import TimeConsts from "../utils/timeConsts";
-import Heading from "../components/heading";
+import PageHead from "../components/pageHead";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Heading />
+      <PageHead />
 
       <main className={styles.main}>
         {/* TODO make this every day or so, maybe check if build is updated first */}

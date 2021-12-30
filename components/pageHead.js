@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 
-const Heading = () => {
+const PageHead = () => {
   return (
     <Head>
       <title>Catnip</title>
@@ -28,4 +28,4 @@ const Heading = () => {
   );
 };
 
-export default Heading;
+export default PageHead;
