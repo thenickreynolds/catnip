@@ -11,6 +11,15 @@ class Videos {
   static options = [this.MICE, this.BIRDS];
 
   static defaultOption = this.MICE;
+
+  static fromName(name) {
+    const fitleredOptions = this.options.filter((v) => v.name === name);
+    if (fitleredOptions.length > 0) {
+      return fitleredOptions[0];
+    } else {
+      return this.defaultOption;
+    }
+  }
 }
 
 export default Videos;

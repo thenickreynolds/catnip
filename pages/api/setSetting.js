@@ -5,6 +5,10 @@ export default withApiAuthRequired(async function settings(req, res) {
   const session = await getSession(req, res);
   const userId = session.user.sub;
 
+  // TODO assume we're setting the video param for now
+  //   const setting = req.setting;
+  const { val } = JSON.parse(req.body);
+
   const uri = process.env.MONGO_DB_URI;
   const client = new MongoClient(uri);
 
@@ -16,16 +20,20 @@ export default withApiAuthRequired(async function settings(req, res) {
     const db = await client.db("catnip");
     const users = db.collection("users");
 
-    let user = await users.findOne({ userId });
-    let createdUser = false;
+    const filter = { userId };
+    const updateDoc = {
+      $set: {
+        video: val,
+      },
+    };
 
-    if (user === null) {
-      await users.insertOne({ userId });
-      user = await users.findOne({ userId });
-      createdUser = true;
-    }
+    const options = { upsert: true };
 
-    res.status(200).json(user);
+    const result = await users.updateOne(filter, updateDoc, options);
+
+    res.status(200).json({
+      name: JSON.stringify(result + "value was " + JSON.stringify(req)),
+    });
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();

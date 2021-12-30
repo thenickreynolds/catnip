@@ -1,22 +1,25 @@
-import styles from "../styles/Home.module.css";
 import Reloader from "../components/reloader";
 import TimeConsts from "../utils/timeConsts";
 import PageHead from "../components/pageHead";
-import Video from "../utils/videos";
+import Video from "../components/video";
+import Spinner from "../components/spinner";
+import useSWR from "swr";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
+  const { data, error } = useSWR("/api/settings", fetcher);
+  const videoName = data ? data.video : null;
+
   return (
-    <div className={styles.container}>
+    <div>
       <PageHead />
 
-      <main className={styles.main}>
+      <main>
         {/* TODO make this every day or so, maybe check if build is updated first */}
-        <Reloader durationMs={TimeConsts.MinuteInMs * 2} />
+        <Reloader durationMs={TimeConsts.HourInMs} />
 
-        <video autoPlay loop muted className={styles.video_container}>
-          <source src={Video.defaultOption.path} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {!data && !error ? <Spinner /> : <Video videoName={videoName} />}
       </main>
     </div>
   );
