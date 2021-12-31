@@ -25,10 +25,11 @@ export default withApiAuthRequired(async function settings(req, res) {
       createdUser = true;
     }
 
-    res.status(200).json(user);
+    await res.status(200).json(user);
+  } catch (e) {
+    await res.status(200).json({ error: e });
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
-    res.status(200).json({ name: "failed" });
   }
 });
