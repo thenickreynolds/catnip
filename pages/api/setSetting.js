@@ -31,12 +31,12 @@ export default withApiAuthRequired(async function settings(req, res) {
 
     const result = await users.updateOne(filter, updateDoc, options);
 
-    res.status(200).json({
+    await res.status(200).json({
       name: JSON.stringify(result + "value was " + JSON.stringify(req)),
     });
+  } catch (e) {
+    await res.status(200).json({ error: e });
   } finally {
-    // Ensures that the client will close when you finish/error
     await client.close();
-    res.status(200).json({ name: "failed" });
   }
 });

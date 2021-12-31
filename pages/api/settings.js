@@ -29,7 +29,6 @@ export default withApiAuthRequired(async function settings(req, res) {
   } catch (e) {
     await res.status(200).json({ error: e });
   } finally {
-    // Ensures that the client will close when you finish/error
     await client.close();
   }
 });
