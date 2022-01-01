@@ -6,11 +6,15 @@ class Video {
 }
 
 class Videos {
-  static MICE = new Video("Mice", "/videos/mice.mp4");
-  static BIRDS = new Video("Birds", "/videos/birds.mp4");
-  static options = [this.MICE, this.BIRDS];
+  static options = [
+    new Video("Mice", "/videos/mice.mp4"),
+    new Video("Birds", "/videos/birds.mp4"),
+    new Video("Fireplace", "/videos/Fireplace.mp4"),
+    new Video("Sky", "/videos/Sky.mp4"),
+    new Video("Nambia", "https://www.youtube.com/watch?v=-s0vUJamgEw"),
+  ];
 
-  static defaultOption = this.MICE;
+  static defaultOption = this.options[0];
 
   static fromName(name) {
     const fitleredOptions = this.options.filter((v) => v.name === name);
