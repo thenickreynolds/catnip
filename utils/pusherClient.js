@@ -4,7 +4,7 @@ import PusherConsts from "./pusherConsts";
 export default class PusherClient {
   static pusherClient;
 
-  static initConnect() {
+  static ensureConnection() {
     if (!this.pusherClient) {
       this.pusherClient = new Pusher(PusherConsts.APP_KEY, {
         cluster: PusherConsts.CLUSTER,
@@ -19,6 +19,12 @@ export default class PusherClient {
     this.pusherClient.bind(PusherConsts.MESSAGE_SETTINGS_UPDATED, (data) => {
       method(data);
     });
+  }
+
+  static unsubscribe(sub) {
+    if (!this.pusherClient) return;
+
+    this.pusherClient.unsubscribe(PusherConsts.userChannelName(sub));
   }
 
   static disconnect() {
