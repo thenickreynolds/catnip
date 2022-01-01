@@ -18,7 +18,10 @@ export default function Home() {
   useEffect(() => {
     if (user) {
       PusherClient.initConnect();
-      PusherClient.subscribeToUser(user.sub, () => mutate());
+      PusherClient.subscribeToUser(user.sub, () => {
+        console.log("attempting to refetch settings");
+        mutate();
+      });
     }
 
     return () => {

@@ -17,7 +17,6 @@ export default class PusherClient {
 
     this.pusherClient.subscribe(PusherConsts.userChannelName(sub));
     this.pusherClient.bind(PusherConsts.MESSAGE_SETTINGS_UPDATED, (data) => {
-      console.log("pusher received data");
       method(data);
     });
   }

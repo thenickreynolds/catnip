@@ -30,17 +30,12 @@ export default withApiAuthRequired(async function settings(req, res) {
 
     const options = { upsert: true };
 
-    const result = await users.updateOne(filter, updateDoc, options);
+    await users.updateOne(filter, updateDoc, options);
 
-    console.log("about to push to pusher");
-    const pushResult = await PusherServer.publishSettingsUpdated(userId);
-    console.log(JSON.stringify(pushResult));
+    await PusherServer.publishSettingsUpdated(userId);
 
-    await res.status(200).json({
-      name: JSON.stringify(result + "value was " + JSON.stringify(req)),
-    });
+    await res.status(200).json();
   } catch (e) {
-    console.log(JSON.stringify(e));
     await res.status(200).json({ error: e });
   } finally {
     await client.close();

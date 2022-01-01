@@ -14,5 +14,8 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.video_container > video {
   object-fit: cover;
 }

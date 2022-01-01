@@ -19,6 +19,7 @@
     "pusher-js": "^7.0.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-player": "^2.9.0",
     "swr": "^1.1.2"
   },
   "devDependencies": {

@@ -2,8 +2,6 @@ import Videos from "../utils/videos";
 import { useState } from "react";
 
 const SettingsComponents = ({ data }) => {
-  console.log(data);
-
   const [selectedVideoName, setSelectedVideoName] = useState(
     data.video || Videos.defaultOption.name
   );
