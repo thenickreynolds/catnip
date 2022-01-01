@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
+import PusherServer from "../../utils/pusherServer";
 
 export default withApiAuthRequired(async function settings(req, res) {
   const session = await getSession(req, res);
@@ -31,10 +32,15 @@ export default withApiAuthRequired(async function settings(req, res) {
 
     const result = await users.updateOne(filter, updateDoc, options);
 
+    console.log("about to push to pusher");
+    const pushResult = await PusherServer.publishSettingsUpdated(userId);
+    console.log(JSON.stringify(pushResult));
+
     await res.status(200).json({
       name: JSON.stringify(result + "value was " + JSON.stringify(req)),
     });
   } catch (e) {
+    console.log(JSON.stringify(e));
     await res.status(200).json({ error: e });
   } finally {
     await client.close();

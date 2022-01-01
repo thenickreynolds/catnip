@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css";
 
 const Video = ({ videoName }) => {
   const vid = Videos.fromName(videoName);
+  console.log(vid.path);
 
   return (
     <video autoPlay loop muted className={styles.video_container}>
