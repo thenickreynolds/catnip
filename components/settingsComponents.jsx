@@ -2,12 +2,18 @@ import Videos from "../utils/videos";
 import { useContext } from "react";
 import { SettingsContext } from "./settingsAndSyncProvider";
 import SettingsState from "../utils/settingsState";
+import { useUser } from "@auth0/nextjs-auth0";
 
 const SettingsComponents = () => {
   const { settingsState, settingsReducer } = useContext(SettingsContext);
+  const { user, isLoading } = useUser();
 
   const selectedVideoName =
     settingsState.videoName || Videos.defaultOption.name;
+
+  if (!user || isLoading) {
+    return <>You must sign up and/or log in to change settings</>;
+  }
 
   return (
     <>

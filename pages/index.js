@@ -6,7 +6,7 @@ import Spinner from "../components/spinner";
 import { useContext } from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import { SettingsContext } from "../components/pageWrapper";
+import { SettingsContext } from "../components/settingsAndSyncProvider";
 
 export default function Home() {
   const { settingsState } = useContext(SettingsContext);
