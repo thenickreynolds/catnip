@@ -3,38 +3,27 @@ import TimeConsts from "../utils/timeConsts";
 import PageHead from "../components/pageHead";
 import Video from "../components/video";
 import Spinner from "../components/spinner";
-import useSWR from "swr";
-import { useUser } from "@auth0/nextjs-auth0";
-import { useEffect } from "react";
-import PusherClient from "../utils/pusherClient";
+import { useContext } from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { SettingsContext } from "../components/pageWrapper";
 
 export default function Home() {
-  const { data, mutate, error } = useSWR("/api/settings", fetcher);
-  const videoName = data ? data.video : null;
-  const { user } = useUser();
-
-  useEffect(() => {
-    if (user) {
-      // Never disconnect, just only connect if the user goes to this page
-      PusherClient.ensureConnection();
-      PusherClient.subscribeToUser(user.sub, () => mutate());
-      return () => PusherClient.unsubscribe(user.sub);
-    }
-  }, [user]);
+  const { settingsState } = useContext(SettingsContext);
 
   return (
-    <div>
+    <>
       <PageHead />
 
       <main>
         {/* TODO make this every day or so, maybe check if build is updated first */}
         <Reloader durationMs={TimeConsts.HourInMs} />
 
-        {!data && !error ? <Spinner /> : <Video videoName={videoName} />}
+        {!settingsState.serverLoadComplete ? (
+          <Spinner />
+        ) : (
+          <Video videoName={settingsState.videoName} />
+        )}
 
         <div className={styles.settings_cog}>
           <Link href="/settings">
@@ -53,6 +42,6 @@ export default function Home() {
           </Link>
         </div>
       </main>
-    </div>
+    </>
   );
 }

@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import SettingsAndSyncProvider from "../components/settingsAndSyncProvider";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -10,7 +11,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <UserProvider>
-      <Component {...pageProps} />
+      <SettingsAndSyncProvider>
+        <Component {...pageProps} />
+      </SettingsAndSyncProvider>
     </UserProvider>
   );
 }

@@ -1,18 +1,13 @@
 import Videos from "../utils/videos";
-import { useState } from "react";
+import { useContext } from "react";
+import { SettingsContext } from "./settingsAndSyncProvider";
+import SettingsState from "../utils/settingsState";
 
-const SettingsComponents = ({ data }) => {
-  const [selectedVideoName, setSelectedVideoName] = useState(
-    data.video || Videos.defaultOption.name
-  );
+const SettingsComponents = () => {
+  const { settingsState, settingsReducer } = useContext(SettingsContext);
 
-  const updateVideoPreference = (newValue) => {
-    setSelectedVideoName(newValue);
-    fetch("/api/setSetting", {
-      method: "POST",
-      body: JSON.stringify({ val: newValue }),
-    });
-  };
+  const selectedVideoName =
+    settingsState.videoName || Videos.defaultOption.name;
 
   return (
     <>
@@ -29,7 +24,13 @@ const SettingsComponents = ({ data }) => {
                 className="form-check-input"
                 checked={video.name === selectedVideoName}
                 required=""
-                onChange={(e) => updateVideoPreference(e.currentTarget.value)}
+                onChange={(e) =>
+                  settingsReducer({
+                    type: SettingsState.ACTION_SETTING_SELECTED_VIDEO,
+                    newValue: e.currentTarget.value,
+                    saveSettings: true,
+                  })
+                }
               />
               <label className="form-check-label" htmlFor={video.name}>
                 {video.name}
